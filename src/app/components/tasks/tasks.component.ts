@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { Task } from '../../Task';
 
@@ -10,15 +10,26 @@ import { Task } from '../../Task';
 export class TasksComponent implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private cdr : ChangeDetectorRef
+    ) {}
 
   ngOnInit(): void {
     this.taskService.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
     });
   }
+  updateView(){
+    this.cdr.detectChanges()
+  }
 
+  addTask(newTask: Task): void {
+    this.tasks.push(newTask)
+    this.updateView();
+  }
   deleteTask(task: Task): void {
+    this.updateView();
     this.taskService.deleteTask(task).subscribe(
       () => {
         this.tasks = this.tasks.filter(t => t.id !== task.id);

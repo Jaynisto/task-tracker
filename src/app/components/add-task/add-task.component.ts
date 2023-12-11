@@ -19,8 +19,10 @@ export class AddTaskComponent implements OnInit {
   subscription! : Subscription
 
 
-  constructor(private taskService: TaskService, private uiService: UIService ,private cdr: ChangeDetectorRef) {
-    this.subscription = this.uiService.onToggle().subscribe(value => (this.showAddTask = value))
+  constructor(private taskService: TaskService, private uiService: UIService) {
+    this.subscription = this.uiService
+    .onToggle()
+    .subscribe((value) => (this.showAddTask = value))
   }
 
   ngOnDestroy(): void {
@@ -30,11 +32,6 @@ export class AddTaskComponent implements OnInit {
   
   ngOnInit(): void {
     
-  }
-
-  // Call this method after updating the task list
-  updateView() {
-    this.cdr.detectChanges();
   }
 
   onSubmit(text: string, day: string, reminder: boolean) {
@@ -49,19 +46,16 @@ export class AddTaskComponent implements OnInit {
       reminder: reminder
     };
 
-    this.onAddTask.emit(newTask);
-
+    
     this.taskService.addTask(newTask).subscribe(
       (addedTask: Task) => {
         console.log('Task successfully added to the server:', addedTask);
+        this.onAddTask.emit(addedTask);
       },
       (error) => {
         console.error('Error adding task to the server:', error);
-        // Handle the error as needed
       }
-      );
-    }
-  this.updateView()
-    
+    );
+  }   
 }
 
