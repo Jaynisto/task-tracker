@@ -1,22 +1,22 @@
 {
   "tasks": [
     {
-      "text": "Mom",
-      "day": "Jun 4th 1:09pm",
-      "reminder": true,
-      "id": 13
-    },
-    {
-      "text": "Family Meeting",
-      "day": "Jun 30th at 1:09pm",
-      "reminder": false,
-      "id": 15
-    },
-    {
       "text": "Family Gathering",
-      "day": "Jun 30th at 1:09pm",
-      "reminder": false,
+      "day": "Jun 30th 4:09pm",
+      "reminder": true,
       "id": 16
+    },
+    {
+      "text": "Chess Game",
+      "day": "Dec 15th 1:00pm",
+      "reminder": true,
+      "id": 17
+    },
+    {
+      "text": "Swimming",
+      "day": "Dec 16th 1:00pm",
+      "reminder": true,
+      "id": 18
     }
   ]
 }
